@@ -6,17 +6,16 @@
 
 using namespace std;
 
-int factorial(int, int);
+int factorial(int);
 
 int main(int argc, char** argv) {
     int number {5};
-    cout << factorial(number, 1);
+    cout << factorial(number);
 }
 
-int factorial(int num, int current_value) {
-    if(num == 1) return current_value;
+int factorial(int num) {
+    if(num == 1) return 1;
     else {
-        current_value *= num;
-        factorial(--num, current_value);
+        return num * factorial(num - 1);
     }
 }
