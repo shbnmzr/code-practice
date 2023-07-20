@@ -1,23 +1,33 @@
+from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
-def starting_page(request):
-    latest_posts = Post.objects.all().order_by('-date')[:3]
+class StaringPageView(ListView):
+    template_name = 'blog/index.html'
+    model = Post
+    ordering = ['-date'] # How to order the list
+    context_object_name = 'posts'
 
-    return render(request, 'blog/index.html', {
-        "posts": latest_posts,
-    })
+    def get_queryset(self) -> QuerySet[Any]:
+        queryset = super().get_queryset()
+        data = queryset[:3]
+        return data
 
-def posts(request):
-    posts_list = Post.objects.all().order_by('-date')
-    return render(request, 'blog/all_posts.html', {
-        "all_posts": posts_list,
-    })
 
-def post_details(request, slug):
-    identified_post = get_object_or_404(Post, slug=slug)
-    return render(request, "blog/post_details.html", {
-        "post": identified_post,
-        "tags": identified_post.tag.all()
-    })
+class Posts(ListView):
+    template_name = 'blog/all_posts.html'
+    ordering = ['-date']
+    model = Post
+    context_object_name = 'all_posts'
+
+class PostDetails(DetailView):
+    template_name = 'blog/post_details.html'
+    model = Post
+    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['tags'] = self.object.tag.all()
+        return context
