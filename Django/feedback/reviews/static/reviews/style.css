@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 90%;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+button {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 2px solid purple;
+}
+
+.form-control {
+    margin: 1rem 0;
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.form-control:focus {
+    border-color: blueviolet;
+}
+
+.error {
+    color: red;
+}
