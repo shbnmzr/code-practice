@@ -41,3 +41,10 @@ class Post(models.Model):
 
     def __str__(self,):
         return f'{self.title} {self.author} {self.tag}'
+
+
+class Comment(models.Model):
+    author = models.CharField(max_length=100)
+    comment_text = models.TextField(max_length=400)
+    corresponding_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    

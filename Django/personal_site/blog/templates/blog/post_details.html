@@ -30,4 +30,17 @@
             {{ post.content | linebreaks }}
         </p>
     </main>
+    <div id="comment-form">
+        <form action="{% url "post_details_page" post.slug %}" method="POST">
+            {% csrf_token %}
+            {% for control in comment_form %}
+            <div class="form-control">
+                {{ control.label_tag }}
+                {{ control }}
+                {{ control.errors }}
+            </div>
+            {% endfor %}
+            <button>Send</button>
+        </form>
+    </div>
 {% endblock %}
