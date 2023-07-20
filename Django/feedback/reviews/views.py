@@ -79,7 +79,6 @@ def review(request):
     else:
         form = ReviewForm()
 
-
     reviews = Review.objects.all()    
     return render(request, 'reviews/review.html', {
         'form': form,
@@ -110,4 +109,17 @@ class SingleReviewView(DetailView):
     model = Review
 
     # Which instance should be fetched -> pk
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        loaded_review = self.object
+        request = self.request
+        favorite_id = request.session.get('favorite_id')
+        context['is_favorite'] = (favorite_id == str(loaded_review.id))
+        return context
+
+
+class AddFavoriteView(View):
+    def POST(self, request):
+        review_id = request.POST['review_id']
+        request.session['favorite_review'] = review_id
+        return HttpResponseRedirect('all_reviews/' + review_id)

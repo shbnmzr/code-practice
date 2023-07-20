@@ -126,3 +126,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Where the files should be stored
 MEDIA_ROOT = BASE_DIR / 'uploads'
+
+# How long a session persists
+SESSION_COOKIE_AGE = (60 * 60 * 60 * 24 * 14)
