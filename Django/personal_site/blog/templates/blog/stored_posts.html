@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+Stored Posts
+{% endblock %}
+
+{% block content %}
+<section>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url "post_details_page" post.slug %}">
+                    {{ post.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
