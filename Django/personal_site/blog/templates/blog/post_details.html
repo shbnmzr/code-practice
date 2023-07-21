@@ -23,7 +23,11 @@
                 {% csrf_token %}
                 <input type="hidden" value="{{ post.id }}" name="post_id"/>
                 <button>
+                    {% if saved_for_later %}
+                    Unsave
+                    {% else %}
                     Read Later!
+                    {% endif %}
                 </button>
             </form>
             
