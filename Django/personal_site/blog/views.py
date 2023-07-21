@@ -35,7 +35,8 @@ class PostDetails(View):
         context = {
             'post': post,
             'tags': post.tag.all(),
-            'comment_form': CommentForm()
+            'comment_form': CommentForm(),
+            'comments': post.comments.all()
         }
         return render(request, 'blog/post_details.html', context)
     
@@ -51,6 +52,6 @@ class PostDetails(View):
         context = {
             'post': fetched_post,
             'tags': fetched_post.tag.all(),
-            'comment_form': CommentForm()
+            'comment_form': CommentForm(),
         }
         return render(request, 'blog/post_details.html', context)

@@ -25,16 +25,38 @@
         </article>
     </section>
 
+    {% if comment_form.errors %}
+        <div id="error-box">
+            <h3>
+                Saving comment failed!
+            </h3>
+        </div>
+    {% endif %}
+
     <main>
         <p>
             {{ post.content | linebreaks }}
         </p>
     </main>
+    <section id="comments">
+        <ul>
+            {% for comment in comments %}
+            <li>
+                <h3>
+                    {{ comment.author }} says:
+                </h3>
+                <p>
+                    {{ comment.comment_text }}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
     <div id="comment-form">
         <form action="{% url "post_details_page" post.slug %}" method="POST">
             {% csrf_token %}
             {% for control in comment_form %}
-            <div class="form-control">
+            <div class="form-control {% if control.errors %} invalid {% endif %}">
                 {{ control.label_tag }}
                 {{ control }}
                 {{ control.errors }}

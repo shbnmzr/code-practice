@@ -88,3 +88,29 @@ main {
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
+
+.errorList {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0;
+  color: red;
+}
+
+.invalid label{
+  color: red;
+}
+
+.invalid input,
+.invalid textarea {
+  border-color: red;
+  background-color: pink;
+}
+
+#error-box {
+  margin: 8rem auto 3rem auto;
+  border: 1px solid red;
+  background-color: pink;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+}
