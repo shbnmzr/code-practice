@@ -12,7 +12,10 @@ async def main():
     await js.add_stream(name="sample-stream", subjects=["some-subject"])
 
     for i in range(0, 10):
-        ack = await js.publish("some-subject", f"hello world: {i}".encode())
+        ack = await js.publish("some-subject", f"hello world: {i}".encode(), headers={
+            'author': 'Somebody',
+        })
+        ## Additional data can be passed inside the header as a dictionary
         print(ack)
 
     await nc.close()

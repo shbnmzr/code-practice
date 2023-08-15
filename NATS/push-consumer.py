@@ -7,7 +7,7 @@ async def main(loop):
 
     async def cb(msg):
         print('Received:', msg.data.decode())  # Assuming the message payload is in bytes
-
+        print('Metadata:', msg.headers)
     # Subscribe to the subject for push-based consumption.
     await nc.subscribe("some-subject", cb=cb)
 

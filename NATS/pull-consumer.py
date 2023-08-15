@@ -16,14 +16,17 @@ async def main(loop):
         subscription = await js.pull_subscribe(subject="some-subject", durable="shabnam-test")
 
         while True:
-            response = await subscription.fetch(batch=10, timeout=None)
-
-            for msg in response:
-                await msg.ack()
-                print('Received:', msg.data.decode())
+            try:
+                response = await subscription.fetch(batch=10, timeout=1)
+                for msg in response:
+                    await msg.ack()
+                    print('Received:', msg.data.decode())
+            except asyncio.TimeoutError:
+                print('HERE')
 
     # Start the pull_messages coroutine.
     asyncio.ensure_future(pull_messages())
+
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
