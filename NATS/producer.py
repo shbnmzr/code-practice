@@ -14,8 +14,8 @@ async def main():
     for i in range(0, 10):
         ack = await js.publish("some-subject", f"hello world: {i}".encode(), headers={
             'author': 'Somebody',
-        })
-        ## Additional data can be passed inside the header as a dictionary
+        })  # Additional data can be passed inside the header as a dictionary and can be access by the consumer
+
         print(ack)
 
     await nc.close()
